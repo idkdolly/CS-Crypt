@@ -12,7 +12,8 @@ const MORSE_CODES = {
   '9': '🙂🙂🙂🙂🙃'
 };
 
-// Words are separated by ' | '
+const REVERSE_MORSE = Object.fromEntries(Object.entries(MORSE_CODES).map(([k, v]) => [v, k]));
+
 export function morse_code_encrypt(text) {
   return text
     .toLowerCase()
