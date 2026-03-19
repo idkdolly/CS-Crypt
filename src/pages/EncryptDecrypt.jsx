@@ -5,6 +5,7 @@ import { morse_code_encrypt, morse_code_decrypt } from '../ciphers/morse_code';
 import { playfairEncrypt, playfairDecrypt } from '../ciphers/playfairCipher';
 import { railFenceEncrypt, railFenceDecrypt } from '../ciphers/railFenceCipher';
 import { vigenereCipher } from '../ciphers/vigenere_cipher';
+import { encrypt as sga_encrypt, decrypt as sga_decrypt } from '../ciphers/standard_galactic_alphabet';
 
 const CIPHERS = [
   { id: 'base64', name: 'Base64', needsKey: false },
@@ -12,7 +13,8 @@ const CIPHERS = [
   { id: 'morse', name: 'Emoji Morse Code', needsKey: false },
   { id: 'playfair', name: 'Playfair Cipher', needsKey: true, keyType: 'text' },
   { id: 'railfence', name: 'Rail Fence Cipher', needsKey: true, keyType: 'number' },
-  { id: 'vigenere', name: 'Vigenère Cipher', needsKey: true, keyType: 'text' }
+  { id: 'vigenere', name: 'Vigenère Cipher', needsKey: true, keyType: 'text' },
+  { id: 'sga', name: 'Standard Galactic Alphabet', needsKey: false }
 ];
 
 export default function EncryptDecryptPage() {
@@ -47,6 +49,8 @@ export default function EncryptDecryptPage() {
           return isEncrypt ? railFenceEncrypt(text, parsedKey) : railFenceDecrypt(text, parsedKey);
         case 'vigenere':
           return vigenereCipher(text, parsedKey, !isEncrypt);
+        case 'sga':
+          return isEncrypt ? sga_encrypt(text) : sga_decrypt(text);
         default:
           return 'Cipher not implemented yet.';
       }

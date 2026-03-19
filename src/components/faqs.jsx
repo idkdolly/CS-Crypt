@@ -46,14 +46,7 @@ export default function FAQs() {
 
   return (
     <div className="faqs-container">
-      <h2 style={{
-        color: 'white',
-        textAlign: 'center',
-        fontSize: '2rem',
-        fontWeight: 'bold',
-        background: "black"
-      }}>Frequently Asked Questions
-      </h2>
+      <h2>Frequently Asked Questions</h2>
 
       <div className="faq-list">
         {faqData.map(faq => (
