@@ -6,7 +6,6 @@ const SGA_MAP = {
   y: '||', z: '⨅'
 };
 
-// Reverse map for decryption
 const REVERSE_SGA = Object.fromEntries(
   Object.entries(SGA_MAP).map(([k, v]) => [v, k])
 );
@@ -20,7 +19,6 @@ function encrypt(text) {
 }
 
 function decrypt(text) {
-  // Multi-char symbols need a greedy pass — try longer tokens first
   const symbols = Object.keys(REVERSE_SGA).sort((a, b) => b.length - a.length);
   let result = '';
   let i = 0;
@@ -35,12 +33,11 @@ function decrypt(text) {
       }
     }
     if (!matched) {
-      result += text[i]; // pass through spaces, punctuation, etc.
+      result += text[i];
       i++;
     }
   }
   return result;
 }
 
-// Export the functions
 export { encrypt, decrypt, SGA_MAP, REVERSE_SGA };

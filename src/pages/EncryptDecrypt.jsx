@@ -14,7 +14,8 @@ const CIPHERS = [
   { id: 'playfair', name: 'Playfair Cipher', needsKey: true, keyType: 'text' },
   { id: 'railfence', name: 'Rail Fence Cipher', needsKey: true, keyType: 'number' },
   { id: 'vigenere', name: 'Vigenère Cipher', needsKey: true, keyType: 'text' },
-  { id: 'sga', name: 'Standard Galactic Alphabet', needsKey: false }
+  { id: 'sga', name: 'Standard Galactic Alphabet', needsKey: false },
+  { id: 'rot13', name: 'ROT13', needsKey: false }
 ];
 
 export default function EncryptDecryptPage() {
@@ -51,6 +52,8 @@ export default function EncryptDecryptPage() {
           return vigenereCipher(text, parsedKey, !isEncrypt);
         case 'sga':
           return isEncrypt ? sga_encrypt(text) : sga_decrypt(text);
+        case 'rot13':
+          return isEncrypt ? encode_ceaser(text, 13) : decode_ceaser(text, 13);
         default:
           return 'Cipher not implemented yet.';
       }
