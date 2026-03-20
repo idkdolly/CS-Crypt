@@ -89,6 +89,30 @@
   animation: slideDown 0.3s ease-out forwards;
 }
 
+.answer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.answer-list li {
+  margin-bottom: 12px;
+  padding-left: 24px;
+  position: relative;
+}
+
+.answer-list li:before {
+  content: '▪';
+  position: absolute;
+  left: 0;
+  color: #ffa212;
+  font-weight: bold;
+}
+
+.answer-list li:last-child {
+  margin-bottom: 0;
+}
+
 @keyframes slideDown {
   from {
     opacity: 0;

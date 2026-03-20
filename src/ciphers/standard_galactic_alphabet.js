@@ -1,4 +1,3 @@
-// Standard Galactic Alphabet — from Minecraft
 const SGA_MAP = {
   a: 'ᔑ', b: 'ʖ', c: 'ᓵ', d: '↸', e: 'ᒷ', f: '⎓', g: '⊣', h: '⍑',
   i: '╎', j: '⋮', k: 'ꖌ', l: 'ꖎ', m: 'ᒲ', n: 'リ', o: '𝙹', p: '!¡',

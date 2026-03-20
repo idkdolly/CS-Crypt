@@ -36,7 +36,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center top;
   border-radius: 15px;
   will-change: transform;
   transform: translateZ(0);
