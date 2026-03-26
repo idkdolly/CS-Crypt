@@ -23,7 +23,6 @@ const Footer = () => {
         color: '#fff',
       }}>
         
-        {/* Socials */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem', color: '#fff' }}>Socials</h3>
           <a href="#" style={{ color: '#d1d5db', textDecoration: 'none', transition: 'color 0.2s', fontSize: '0.95rem' }}>LinkedIn / @ieeecsmuj ↗</a>
@@ -32,7 +31,6 @@ const Footer = () => {
           <a href="#" style={{ color: '#d1d5db', textDecoration: 'none', transition: 'color 0.2s', fontSize: '0.95rem' }}>GitHub / @IEEECSMUJ ↗</a>
         </div>
 
-        {/* Contact Us */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem', color: '#fff' }}>Contact Us</h3>
           
@@ -49,7 +47,6 @@ const Footer = () => {
           </div>
       </div>
 
-        {/* Links */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem', color: '#fff' }}>Links</h3>
           <a href="#" style={{ color: '#d1d5db', textDecoration: 'none', transition: 'color 0.2s', fontSize: '0.95rem' }}>MUJ Official Website</a>
@@ -59,7 +56,6 @@ const Footer = () => {
           <a href="#" style={{ color: '#d1d5db', textDecoration: 'none', transition: 'color 0.2s', fontSize: '0.95rem' }}>IEEE Global Membership</a>
         </div>
 
-        {/* Address */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem', color: '#fff' }}>Address</h3>
           <div style={{ color: '#d1d5db', lineHeight: '1.5', fontSize: '0.95rem' }}>

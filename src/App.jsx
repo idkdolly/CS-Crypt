@@ -8,11 +8,74 @@ import EncryptDecryptPage from './pages/EncryptDecrypt'
 import FAQs from './components/faqs'
 import PixelBlast from './utils/pixelblast'
 import Footer from './utils/Footer'
+import { useRef } from 'react'
+
+const FloatingHeart = ({ startX, startY, onComplete }) => {
+  const heartRef = useRef(null);
+  const onCompleteRef = useRef(onComplete);
+
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
+  useEffect(() => {
+    let animationFrame;
+    let startTime = Date.now();
+    const duration = 1000;
+    const phase = Math.random() * Math.PI * 2;
+    const amplitude = 30 + Math.random() * 50; 
+    const freq = 0.003 + Math.random() * 0.002; 
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = elapsed / duration;
+
+      if (progress >= 1) {
+        if (onCompleteRef.current) onCompleteRef.current();
+        return;
+      }
+
+      if (heartRef.current) {
+        const currentY = progress * 300; 
+        const currentX = Math.sin(elapsed * freq + phase) * amplitude;
+        const opacity = progress > 0.8 ? 1 - ((progress - 0.8) / 0.2) : 1;
+        const rotation = Math.cos(elapsed * freq + phase) * 25;
+
+        heartRef.current.style.transform = `translate(-50%, -50%) translate(${currentX}px, ${currentY}px) rotate(${rotation}deg)`;
+        heartRef.current.style.opacity = opacity;
+      }
+
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [startX, startY]);
+
+  return (
+    <div
+      ref={heartRef}
+      style={{
+        position: 'fixed',
+        top: startY,
+        left: startX,
+        fontSize: '2rem',
+        zIndex: 9999,
+        pointerEvents: 'none',
+        willChange: 'transform, opacity'
+      }}
+    >
+      ❤️
+    </div>
+  );
+};
 
 function App() {
   const [currentPage, setCurrentPage] = useState(() => {
     return localStorage.getItem('currentPage') || 'home'
   })
+  const [hearts, setHearts] = useState([])
 
   useEffect(() => {
     localStorage.setItem('currentPage', currentPage)
@@ -65,8 +128,14 @@ function App() {
       }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
           <Button onClick={() => setCurrentPage('home')}>Home</Button>
-          <Button onClick={() => setCurrentPage('encrypt')}>Encrypt/Decrypt</Button>
-          <Button onClick={() => setCurrentPage('about')}>About Us</Button>
+          <Button scramble onClick={() => setCurrentPage('encrypt')}>Encrypt/Decrypt</Button>
+          <Button onClick={(e) => {
+            setCurrentPage('about');
+            if (e && e.clientX) {
+              const newHeart = { id: Date.now() + Math.random(), x: e.clientX, y: e.clientY };
+              setHearts([newHeart]);
+            }
+          }}>About Us</Button>
           <Button onClick={() => setCurrentPage('team')}>Team</Button>
         </div>
       </nav>
@@ -80,6 +149,15 @@ function App() {
           <FAQs />
         </div>
       )}
+
+      {hearts.map(heart => (
+        <FloatingHeart 
+          key={heart.id} 
+          startX={heart.x} 
+          startY={heart.y} 
+          onComplete={() => setHearts(prev => prev.filter(h => h.id !== heart.id))} 
+        />
+      ))}
 
       <Footer />
     </div>

@@ -8,32 +8,64 @@ export default function FAQs() {
     {
       id: 1,
       question: 'What is encryption?',
-      answer: 'Encryption is the process of converting information into a code to prevent unauthorized access. It uses mathematical algorithms to scramble data so that only authorized parties with the correct decryption key can read it.'
+      answer: [
+        'Encryption is the process of converting information into a code to prevent unauthorized access.',
+        'It uses mathematical algorithms to scramble data.',
+        'Only authorized parties with the correct decryption key can read encrypted data.'
+      ]
     },
     {
       id: 2,
       question: 'What ciphers are supported?',
-      answer: 'We support multiple encryption methods including Base64, Caesar Cipher, Morse Code, Vigenere Cipher, Playfair Cipher, and Rail Fence Cipher. Each has different use cases and security levels.'
+      answer: [
+        'Base64 - Encodes data using 64 characters for safe transmission',
+        'Caesar Cipher - Shifts letters by a fixed position',
+        'Morse Code - Converts characters to dots and dashes',
+        'Vigenere Cipher - Uses a keyword to shift letters variably',
+        'Playfair Cipher - Encrypts pairs of letters using a 5x5 grid',
+        'Rail Fence Cipher - Arranges text in a zigzag pattern across multiple rails',
+        'Standard Galactic Alphabet - Cryptic runic symbols popularized by video games',
+        'ROT13 - A Caesar cipher variant that shifts letters by exactly 13 places'
+      ]
     },
     {
       id: 3,
-      question: 'Is my data secure?',
-      answer: 'This tool performs encryption in your browser. No data is sent to external servers. However, for highly sensitive information, we recommend using industry-standard encryption tools.'
+      question: 'Who are we and what is our mission?',
+      answer: [
+        'We are a vibrant community of tech enthusiasts united by a common goal – to foster a dynamic coding environment through an exciting array of tech and semi-tech events.',
+        'Our mission is to inspire innovation, collaboration, and continuous learning!'
+      ]
     },
     {
       id: 4,
-      question: 'What is a Caesar Cipher?',
-      answer: 'A Caesar Cipher is a simple substitution cipher where each letter is shifted by a fixed number of positions. For example, with a shift of 3, A becomes D, B becomes E, and so on.'
+      question: 'What are the key differences between encryption methods?',
+      answer: [
+        'Base64 is for encoding, not security',
+        'Caesar Cipher uses fixed shifts',
+        'Vigenere Cipher uses variable shifts with keywords',
+        'Playfair Cipher encrypts letter pairs',
+        'Rail Fence is a transposition cipher',
+        'Standard Galactic Alphabet substitutes letters rather than encrypting mathematically',
+        'ROT13 is a specific, fully reversible subset of the Caesar cipher'
+      ]
     },
     {
       id: 5,
       question: 'What is the difference between encryption and hashing?',
-      answer: 'Encryption is reversible - you can decrypt data back to its original form. Hashing is one-way - you cannot reverse a hash. Both serve different security purposes.'
+      answer: [
+        'Encryption is reversible - you can decrypt data back to its original form',
+        'Hashing is one-way - you cannot reverse a hash',
+        'Both serve different security purposes'
+      ]
     },
     {
       id: 6,
       question: 'Can I decrypt any cipher?',
-      answer: 'To decrypt, you need the correct key or password used during encryption. Without it, decryption is not feasible (that\'s the point of encryption!).'
+      answer: [
+        'You need the correct key or password used during encryption',
+        'Without the key, decryption is not feasible',
+        'That\'s the fundamental purpose of encryption'
+      ]
     }
   ];
 
@@ -46,14 +78,7 @@ export default function FAQs() {
 
   return (
     <div className="faqs-container">
-      <h2 style={{
-        color: 'white',
-        textAlign: 'center',
-        fontSize: '2rem',
-        fontWeight: 'bold',
-        background: "black"
-      }}>Frequently Asked Questions
-      </h2>
+      <h2>Frequently Asked Questions</h2>
 
       <div className="faq-list">
         {faqData.map(faq => (
@@ -67,7 +92,15 @@ export default function FAQs() {
             </button>
             {expanded[faq.id] && (
               <div className="faq-answer">
-                {faq.answer}
+                {Array.isArray(faq.answer) ? (
+                  <ul className="answer-list">
+                    {faq.answer.map((line, idx) => (
+                      <li key={idx}>{line}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  faq.answer
+                )}
               </div>
             )}
           </div>
