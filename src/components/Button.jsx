@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 
 const GLYPHS = "!@#$%^&*()_+-=<>?/\\[]{}Xx";
@@ -41,6 +41,16 @@ const runScrambleAnimation = (element, text, duration = 0.35, onComplete) => {
 
 const Button = ({ onClick, children, scramble = false, scrambleDuration = 0.35 }) => {
   const buttonRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const handleClick = async (e) => {
     if (scramble && buttonRef.current) {
@@ -56,16 +66,21 @@ const Button = ({ onClick, children, scramble = false, scrambleDuration = 0.35 }
       ref={buttonRef}
       onClick={handleClick}
       style={{
-        padding: '12px 24px',
+        padding: isMobile ? '10px 14px' : '12px 24px',
         backgroundColor: '#121212',
         color: '#ffa212',
         border: '2px solid #ffa212',
         borderRadius: '8px',
         cursor: 'pointer',
-        fontSize: '18px',
+        fontSize: isMobile ? '13px' : '18px',
         fontWeight: 'bold',
         transition: 'all 0.3s ease',
         boxShadow: '0 4px 14px 0 rgba(255, 162, 18, 0.39)',
+        minHeight: '44px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        whiteSpace: 'nowrap',
       }}
       onMouseOver={(e) => {
         e.currentTarget.style.backgroundColor = '#1e1e1e'

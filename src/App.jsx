@@ -76,10 +76,20 @@ function App() {
     return localStorage.getItem('currentPage') || 'home'
   })
   const [hearts, setHearts] = useState([])
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth < 768)
 
   useEffect(() => {
     localStorage.setItem('currentPage', currentPage)
   }, [currentPage])
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const renderPage = () => {
     switch (currentPage) {
@@ -111,32 +121,32 @@ function App() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: '1.25rem 2.5rem',
+        padding: isMobile ? '0.75rem 1rem' : '1.25rem 2.5rem',
         border: '1px solid rgba(255, 255, 255, 0.15)',
         borderTop: '1px solid rgba(255, 255, 255, 0.3)',
         backgroundColor: 'rgba(20, 20, 25, 0.3)',
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
         position: 'fixed',
-        width: 'max-content',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        top: '25px',
-        borderRadius: '100px',
+        width: isMobile ? '100%' : 'max-content',
+        left: isMobile ? '0' : '50%',
+        transform: isMobile ? 'none' : 'translateX(-50%)',
+        top: isMobile ? '0' : '25px',
+        borderRadius: isMobile ? '0' : '100px',
         zIndex: 50,
         boxShadow: '0 20px 40px rgba(0,0,0,0.6), inset 0 2px 5px rgba(255, 255, 255, 0.1)'
       }}>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <Button onClick={() => setCurrentPage('home')}>Home</Button>
-          <Button scramble onClick={() => setCurrentPage('encrypt')}>Encrypt/Decrypt</Button>
+        <div style={{ display: 'flex', gap: isMobile ? '0.5rem' : '2rem', alignItems: 'center', flexWrap: 'wrap', width: '100%', justifyContent: 'center' }}>
+          <Button onClick={() => setCurrentPage('home')}>{isMobile ? 'Home' : 'Home'}</Button>
+          <Button scramble onClick={() => setCurrentPage('encrypt')}>{isMobile ? 'Encrypt' : 'Encrypt/Decrypt'}</Button>
           <Button onClick={(e) => {
             setCurrentPage('about');
             if (e && e.clientX) {
               const newHeart = { id: Date.now() + Math.random(), x: e.clientX, y: e.clientY };
               setHearts([newHeart]);
             }
-          }}>About Us</Button>
-          <Button onClick={() => setCurrentPage('team')}>Team</Button>
+          }}>{isMobile ? 'About' : 'About Us'}</Button>
+          <Button onClick={() => setCurrentPage('team')}>{isMobile ? 'Team' : 'Team'}</Button>
         </div>
       </nav>
 
@@ -145,7 +155,7 @@ function App() {
       </main>
 
       {currentPage === 'home' && (
-        <div style={{ position: 'relative', zIndex: 10, width: '100%', padding: '2rem' }}>
+        <div style={{ position: 'relative', zIndex: 10, width: '100%', padding: isMobile ? '1.5rem' : '2rem' }}>
           <FAQs />
         </div>
       )}
