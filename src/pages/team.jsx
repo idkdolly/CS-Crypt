@@ -3,15 +3,15 @@ import { Github, Linkedin } from 'lucide-react';
 
 const TEAM = [
   { name: 'Dolly Srivastava', role: 'Project Head', image: '/src/assets/Dolly srivastava.jpg', github: 'https://github.com/idkdolly', linkedin: 'https://www.linkedin.com/in/dollysrivastava' },
-  { name: 'Anshuman Singh', role: 'Project Head', image: '/src/assets/Anshuman Singh.jpg', github: '#', linkedin: '#' },
-  { name: 'Sarthak Malhotra', role: 'Cipher Team', image: '/src/assets/sarthak malhotra.jpeg', github: 'https://github.com/Sarthak-Malhotra', linkedin: '#' },
+  { name: 'Anshuman Singh', role: 'Project Head', image: '/src/assets/Anshuman Singh.jpg', github: '', linkedin: '' },
+  { name: 'Sarthak Malhotra', role: 'Cipher Team', image: '/src/assets/sarthak malhotra.jpeg', github: 'https://github.com/Sarthak-Malhotra', linkedin: 'https://www.linkedin.com/in/sarthak-will-work/'},
   { name: 'Yuvika', role: 'Cipher Team', image: '/src/assets/yuvika.jpeg', github: 'https://github.com/YuvikaSachdeva', linkedin: 'https://www.linkedin.com/in/yuvika-sachdeva-82a391295/' },
-  { name: 'Kashvi Mohta', role: 'Cipher Team', image: '/src/assets/kashvi.jpeg', github: 'https://github.com/kash1007', linkedin: '#' },
+  { name: 'Kashvi Mohta', role: 'Cipher Team', image: '/src/assets/kashvi.jpeg', github: 'https://github.com/kash1007', linkedin: '' },
   { name: 'Dwijesh Chilukuri', role: 'UI/UX', image: '/src/assets/Dwijesh Chilukuri.png', github: 'https://github.com/just-dwijesh', linkedin: 'https://www.linkedin.com/in/dwijesh-chilukuri-803177372?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
-  { name: 'Ananaya Mishra', role: 'UI/UX', image: '/src/assets/Aditi Rai.jpg', github: 'https://github.com/aditirai14002', linkedin: '#' },
-  { name: 'Amisha Upadhyay', role: 'UI/UX', image: '/src/assets/Amisha Upadhyay.jpg', github: 'https://github.com/amishau209-carat', linkedin: 'https://www.linkedin.com/in/amisha-upadhyay-402796378?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
+  { name: 'Ananaya Mishra', role: 'UI/UX', image: '/src/assets/ananya mishra.jpeg', github: '', linkedin: 'https://www.linkedin.com/in/ananya-mishra-87930a3a3/' },
+  { name: 'Amisha Upadhyay', role: 'UI/UX', image: '/src/assets/Amisha Upadhyay.jpg', github: 'https://github.com/amishau209-carat', linkedin: 'https://www.linkedin.com/in/amisha-upadhyay-402796378/' },
   { name: 'Tanishq B', role: 'UI/UX', image: '/src/assets/Tanishq B.png', github: 'https://github.com/TanishqBhatnagar312', linkedin: 'https://www.linkedin.com/in/tanishq-bhatnagar-2b9408349' },
-  { name: 'Aditi Rai', role: 'UI/UX', image: '/src/assets/Aditi Rai.jpg', github: 'https://github.com/aditirai14002', linkedin: '#' },
+  { name: 'Aditi Rai', role: 'UI/UX', image: '/src/assets/Aditi Rai.jpg', github: 'https://github.com/aditirai14002', linkedin: '' },
   { name: 'Anukriti', role: 'UI/UX', image: '/src/assets/Anukriti.jpg', github: 'anukritiverma236-hub', linkedin: 'https://www.linkedin.com/in/anukriti-verma-b3177a376' },
   { name: 'Akshita Dhiman', role: 'UI/UX', image: '/src/assets/Akshita Dhiman.jpeg', linkedin: 'https://www.linkedin.com/in/akshita-dhiman-29630a343?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
 ];
