@@ -24,6 +24,16 @@ export default function EncryptDecryptPage() {
   const [cipher, setCipher] = useState('base64');
   const [key, setKey] = useState('');
   const [lastEdited, setLastEdited] = useState('plain');
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const currentCipher = CIPHERS.find(c => c.id === cipher);
 
@@ -92,47 +102,47 @@ export default function EncryptDecryptPage() {
       minHeight: '100vh',
       backgroundColor: 'transparent',
       color: '#ffffff',
-      padding: '8rem 2rem 4rem',
+      padding: isMobile ? '6rem 1rem 2rem' : '8rem 2rem 4rem',
       boxSizing: 'border-box',
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
       <div style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '2rem',
+        gap: isMobile ? '1rem' : '2rem',
         maxWidth: '1000px',
         width: '100%',
-        padding: '2rem',
-        borderRadius: '24px',
+        padding: isMobile ? '1rem' : '2rem',
+        borderRadius: isMobile ? '16px' : '24px',
         backgroundColor: 'rgba(20, 20, 25, 0.2)',
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
         border: '1px solid rgba(255, 255, 255, 0.1)',
         boxShadow: '0 8px 32px rgba(0,0,0,0.4)'
       }}>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <div style={{ flex: 1, minWidth: '200px' }}>
-            <label style={{ display: 'block', marginBottom: '0.75rem', color: '#ffa212', fontWeight: 'bold', fontSize: '1.25rem' }}>Select Cipher Algorithm</label>
+        <div style={{ display: 'flex', gap: isMobile ? '0.5rem' : '1rem', flexWrap: 'wrap' }}>
+          <div style={{ flex: 1, minWidth: '150px' }}>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#ffa212', fontWeight: 'bold', fontSize: isMobile ? '0.95rem' : '1.25rem' }}>Select Cipher Algorithm</label>
             <select 
               value={cipher} 
               onChange={(e) => setCipher(e.target.value)}
               style={{
-                width: '100%', padding: '1rem', borderRadius: '12px',
+                width: '100%', padding: isMobile ? '0.75rem' : '1rem', borderRadius: '12px',
                 backgroundColor: 'rgba(0,0,0,0.8)', color: '#ffa212', border: '1px solid rgba(255, 162, 18, 0.4)', outline: 'none',
-                fontSize: '1.15rem', cursor: 'pointer'
+                fontSize: isMobile ? '0.95rem' : '1.15rem', cursor: 'pointer', minHeight: isMobile ? '44px' : 'auto'
               }}
             >
               {CIPHERS.map(c => (
-                <option key={c.id} value={c.id} style={{ backgroundColor: '#000000', color: '#ffa212', fontSize: '1.1rem', padding: '0.5rem' }}>
+                <option key={c.id} value={c.id} style={{ backgroundColor: '#000000', color: '#ffa212', fontSize: isMobile ? '0.9rem' : '1.1rem', padding: '0.5rem' }}>
                   {c.name}
                 </option>
               ))}
             </select>
           </div>
           {currentCipher.needsKey && (
-            <div style={{ flex: 1, minWidth: '200px' }}>
-              <label style={{ display: 'block', marginBottom: '0.75rem', color: '#ffa212', fontWeight: 'bold', fontSize: '1.25rem' }}>
-                Key Content ({currentCipher.keyType})
+            <div style={{ flex: 1, minWidth: '150px' }}>
+              <label style={{ display: 'block', marginBottom: '0.5rem', color: '#ffa212', fontWeight: 'bold', fontSize: isMobile ? '0.95rem' : '1.25rem' }}>
+                Key ({currentCipher.keyType})
               </label>
               <input 
                 type={currentCipher.keyType === 'number' ? 'number' : 'text'}
@@ -140,31 +150,31 @@ export default function EncryptDecryptPage() {
                 onChange={(e) => setKey(e.target.value)}
                 placeholder={`Enter ${currentCipher.keyType} key...`}
                 style={{
-                  width: '100%', padding: '1rem', borderRadius: '12px', boxSizing: 'border-box',
+                  width: '100%', padding: isMobile ? '0.75rem' : '1rem', borderRadius: '12px', boxSizing: 'border-box',
                   backgroundColor: 'rgba(0,0,0,0.5)', color: 'white', border: '1px solid rgba(255, 162, 18, 0.4)', outline: 'none',
-                  fontSize: '1.15rem'
+                  fontSize: isMobile ? '0.95rem' : '1.15rem', minHeight: isMobile ? '44px' : 'auto'
                 }}
               />
             </div>
           )}
         </div>
 
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'stretch' }}>
+        <div style={{ display: 'flex', gap: isMobile ? '0' : '1rem', alignItems: 'stretch', flexDirection: isMobile ? 'column' : 'row' }}>
           <textarea 
             value={plainText}
             onChange={handlePlainChange}
             placeholder="[Readable Text] Type your message here to Encrypt..."
             style={{
-              flex: 1, minHeight: '250px', padding: '1.5rem', borderRadius: '16px',
+              flex: 1, minHeight: isMobile ? '150px' : '250px', padding: isMobile ? '1rem' : '1.5rem', borderRadius: '16px',
               backgroundColor: 'rgba(0,0,0,0.3)', color: 'white', border: '1px solid rgba(255, 255, 255, 0.1)',
-              resize: 'none', outline: 'none', fontSize: '1.25rem', lineHeight: '1.6'
+              resize: 'none', outline: 'none', fontSize: isMobile ? '1rem' : '1.25rem', lineHeight: '1.6', boxSizing: 'border-box'
             }}
           />
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', justifyContent: 'center', alignItems: 'center', padding: '0 1rem' }}>
+          <div style={{ display: 'flex', flexDirection: isMobile ? 'row' : 'column', gap: isMobile ? '0.5rem' : '1rem', justifyContent: 'center', alignItems: 'center', padding: isMobile ? '0.5rem 0' : '0 1rem' }}>
             <div style={{
-              fontSize: '3rem', color: '#ffa212', opacity: 0.8,
-              textShadow: '0 0 20px rgba(255, 162, 18, 0.8)'
+              fontSize: isMobile ? '2rem' : '3rem', color: '#ffa212', opacity: 0.8,
+              textShadow: '0 0 20px rgba(255, 162, 18, 0.8)', transform: isMobile ? 'rotate(90deg)' : 'none'
             }}>
               ⟷
             </div>
@@ -175,9 +185,9 @@ export default function EncryptDecryptPage() {
             onChange={handleCipherChange}
             placeholder="[Secret Text] Paste cipher here to Decrypt..."
             style={{
-              flex: 1, minHeight: '250px', padding: '1.5rem', borderRadius: '16px',
+              flex: 1, minHeight: isMobile ? '150px' : '250px', padding: isMobile ? '1rem' : '1.5rem', borderRadius: '16px',
               backgroundColor: 'rgba(0,0,0,0.5)', color: '#ffa212', border: '1px solid rgba(255, 162, 18, 0.4)',
-              resize: 'none', outline: 'none', fontSize: '1.25rem', lineHeight: '1.6'
+              resize: 'none', outline: 'none', fontSize: isMobile ? '1rem' : '1.25rem', lineHeight: '1.6', boxSizing: 'border-box'
             }}
           />
         </div>
